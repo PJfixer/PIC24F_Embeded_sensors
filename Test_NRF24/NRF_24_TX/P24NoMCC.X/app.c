@@ -8,7 +8,7 @@ void SYSTEM_Initialize(void)
     OSCILLATOR_Initialize();
     usart_init();
     I2C_init();
-  //  SPI1_Initialize();
+    SPI1_Initialize();
 }
 
 void OSCILLATOR_Initialize(void)
@@ -71,12 +71,25 @@ void PIN_MANAGER_Initialize(void)
     TRISBbits.TRISB13 = 0; //  CS N°1 
     TRISBbits.TRISB12 = 0;  // SDO
     TRISBbits.TRISB11 = 1;  // SDI
-   /* RPOR5bits.RP10R = 0x0008;   //RB10->SPI1:SCK1OUT;
+    RPOR5bits.RP10R = 0x0008;   //RB10->SPI1:SCK1OUT;
     RPOR6bits.RP13R = 0x0009;   //RB13->SPI1:SS1OUT;
     RPINR20bits.SDI1R = 0x000B;   //RB11->SPI1:SDI1;
-    RPOR6bits.RP12R = 0x0007;   //RB12->SPI1:SDO1; */
+    RPOR6bits.RP12R = 0x0007;   //RB12->SPI1:SDO1; 
 
 }
+
+void I2C_Scan(void)
+{
+    uint8_t i ;
+    for(i=0;i<128;i++)
+    {
+        if(I2C_ping(i) == 0)
+        {
+            printf("device found at : %u \r\n",i);
+        }
+
+    }
+} 
 
 
 

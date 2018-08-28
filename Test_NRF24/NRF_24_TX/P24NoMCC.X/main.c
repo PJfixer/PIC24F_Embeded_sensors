@@ -54,79 +54,70 @@
  */
 union Word lumos;
 
+
+void ConvertFloattoLCDString(float FractionalNumber)
+{
+ unsigned char LCDBuffer[10] ;
+ sprintf((char*)LCDBuffer,"%.2f",(double)FractionalNumber);
+ lcd_str((char*)LCDBuffer) ;
+}
+
 int main(void)
 {
  
     SYSTEM_Initialize();
-//uint8_t tx_address1[5] = {0xE7,0xE7,0xE7,0xE7,0xE7};
-//uint8_t rx_address1[5] = {0xD7,0xD5,0xD7,0xD7,0xD7};
-
-uint8_t tx_address2[5] = {0xD7,0xD5,0xD7,0xD7,0xD7};
-uint8_t rx_address2[5] = {0xE7,0xE7,0xE7,0xE7,0xE7};
-
-
-uint8_t data_receive[4];
-
- csnPin1 = 1;
- cePin1 = 0;
- csnPin2 = 1;
- cePin2 = 0;
-
-
-
-#ifndef SOFT
-
-#else
-  UART1_SendStr("Reglage emmeteur  (RX): \r\n");
-  nrf24_config(20,PAYLOAD_LEN,1);
-   nrf24_tx_address(tx_address2,1);
-   nrf24_rx_address(rx_address2,1);     
+    //SetupInteruptEncoder();
+  /*  BME280_write8(BME280_REGISTER_CONTROLHUMID, 0x03); // regler avant  CONTROL !!!
+    BME280_write8(BME280_REGISTER_CONTROL, 0b01101111);
+    readSensorCoefficients();
+    BME280_goForceMode(); */
    
-      
-   
-  UART1_SendStr("configuration emmeteur 1 (RX) \r\n");
-  nrf24_displayConfiguration(1);
-   UART1_SendStr("\r\n\r\n\r\n\r\n\r\n\r\n");
-
-
-                                         
-
-      
+   // float input = BME280_readTemperature();
     
+    
+   // LCDbegin(20,4,LCD_5x8DOTS);
    
-   
-   
- 
-#endif
-
- 
+    
   
-    
+   
+    //LCDnoCursor();
+    TRISAbits.TRISA3 = 0 ;
+   // LCDnoBlink();
+   // LCDsetBacklight(1);
+     
+    // memory_one_Write(EEPROM1,0x0000,0xAA);
     
     while (1)
     {
-      
-   
-      
-         LATBbits.LATB5 = 1;
+         
+      // LCDsetCursor(0,0);
+        //lcd_str("Meteo PIC 24 ");
+     //  BME280_goForceMode();
+        __delay_ms(200);
+     //   input = BME280_readTemperature();
+        //LCDsetCursor(0,1);
+         //lcd_str("Temperature : ");
+    //    ConvertFloattoLCDString(input);
+    //    input = BME280_readHumidity();
+        //LCDsetCursor(0,2);
+         //lcd_str("Humidite : ");
+   //     ConvertFloattoLCDString(input);
+        //lcd_str(" %");
+   //     input = BME280_readPressure();
+        //LCDsetCursor(0,3);
+         //lcd_str("Pression:");
+     //   ConvertFloattoLCDString(input);
+         //lcd_str(" hpa"); 
+                
+        
+         LATAbits.LATA3 = 1;
          __delay_ms(1000);
-         
-          if(nrf24_dataReady(1))
-          {
-          
-            nrf24_getData(data_receive,1);    
-            UART1_SendHex(data_receive[0]);
-            UART1_SendHex(data_receive[1]);
-            UART1_SendHex(data_receive[2]);
-            UART1_SendHex(data_receive[3]);
-            UART1_SendStr("\r \n");
-            clearTable(data_receive,4);
-          }
+        
             
-            
-         
-         LATBbits.LATB5 = 0;
+        
+         LATAbits.LATA3 = 0;
         __delay_ms(1000);
+         
     }
 
  

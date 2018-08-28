@@ -13,12 +13,12 @@
 #define FCY 16000000UL
 #include <libpic30.h>
 #include "uart.h"
-//#include "i2c.h"
 #include "I2CA.h"
 #include "PCA8574_lcd.h"
-#include "BH1750.h"
 #include "spi1.h"
-#include "nrf24.h"
+#include "RotaryEnc.h"
+#include "bme280.h"
+#include "24LC256.h"
 
 union Word            //Setup a Union
 {

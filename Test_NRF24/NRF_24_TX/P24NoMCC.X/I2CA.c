@@ -1,17 +1,4 @@
 
-/*****************************************************************************
- *
- * I2C module Library routines
- *
- *****************************************************************************
- * FileName:        I2C.c
- * Processor:       PIC24
- * Compiler:        C30
- *
- * Author:          Frank Maier
- * Date:			21.04.2012
- *
- *****************************************************************************/
 
 
 #include "I2CA.h"
@@ -198,7 +185,7 @@ void I2C_write(char addr, char subaddr, char value)
 
 
 /*****************************************************************************
- * Function: 	I2C_write
+ * Function: 	I2C_read
  * Overview: 	full read prototype
  * Input: 		Device address, register subaddress
  * Output: 		8-Byte read
@@ -241,3 +228,5 @@ char I2C_ping(int addr)
 
   return temp;
 }
+
+

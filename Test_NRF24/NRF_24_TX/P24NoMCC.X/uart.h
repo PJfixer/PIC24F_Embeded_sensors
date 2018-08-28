@@ -6,7 +6,7 @@
  */
 
 void putch( char data);
-void uart_init(void);
+void usart_init(void);
 void SendUART1(unsigned int data);
 void UART1_SendStr(const char * s);
 void UART1_SendDec(unsigned int data);

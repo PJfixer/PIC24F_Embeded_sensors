@@ -4,6 +4,18 @@
 #include <libpic30.h>
 #include "I2CA.h"
 
+/************************************************************/
+/******************GENERIC FUNCTION**************************/
+/*Put here your custom I2C function for easy use of lib in your project*/
+#define I2C_START I2C_start //function to send start condition
+#define I2C_STOP I2C_stop //function to send stop condition 
+#define I2C_RESTART I2C_restart // function to send restart condition 
+#define I2C_WAIT_IDLE I2C_idle // function to wait for idle bus 
+#define I2C_SEND_1_BYTE I2C_send_byte // fonction to send one byte 
+#define I2C_RECV_1_BYTE I2C_receive_byte // fonction to receive one byte then send ACK or NACK
+
+/*****************END GENERIC FUNCTION*******************************/
+
 // commands
 #define LCD_CLEARDISPLAY 0x01
 #define LCD_RETURNHOME 0x02
@@ -61,24 +73,24 @@ void _sendNibble(unsigned char halfByte, unsigned char mode);
 void _send(unsigned char value, unsigned char mode);
 inline void _command(unsigned char value);
 inline void write(unsigned char value);
-void begin(unsigned char cols, unsigned char rows, unsigned char charsize);
-void clear();
-void home();
-void createChar(unsigned char location, unsigned char charmap[]);
-void setCursor(unsigned char col, unsigned char row); 
-void setBacklight(unsigned char brightness);
-void noAutoscroll(void);
-void autoscroll(void);
- void noDisplay();
- void display();
- void noBlink();
- void blink();
- void noCursor();
- void cursor();
- void scrollDisplayLeft();
- void scrollDisplayRight();
- void leftToRight();
- void rightToLeft(); 
+void LCDbegin(unsigned char cols, unsigned char rows, unsigned char charsize);
+void LCDclear();
+void LCDhome();
+void LCDcreateChar(unsigned char location, unsigned char charmap[]);
+void LCDsetCursor(unsigned char col, unsigned char row); 
+void LCDsetBacklight(unsigned char brightness);
+void LCDnoAutoscroll(void);
+void LCDautoscroll(void);
+ void LCDnoDisplay();
+ void LCDdisplay();
+ void LCDnoBlink();
+ void LCDblink();
+ void LCDnoCursor();
+ void LCDcursor();
+ void LCDscrollDisplayLeft();
+ void LCDscrollDisplayRight();
+ void LCDleftToRight();
+ void LCDrightToLeft(); 
  void lcd_str(const char * s);
  void lcd_SendDec(unsigned int data);
  

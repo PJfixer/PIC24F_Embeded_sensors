@@ -10,7 +10,7 @@ unsigned char _displayfunction ;
  unsigned char _displaymode ;
  unsigned char _displaycontrol;
 
-void begin(unsigned char cols, unsigned char lines, unsigned char dotsize) {
+void LCDbegin(unsigned char cols, unsigned char lines, unsigned char dotsize) {
   // cols ignored !
   _numlines = lines;
 
@@ -46,10 +46,10 @@ void begin(unsigned char cols, unsigned char lines, unsigned char dotsize) {
 
   // turn the display on with no cursor or blinking default
   _displaycontrol = LCD_DISPLAYON | LCD_CURSORON | LCD_BLINKON;  
-  display();
+  LCDdisplay();
 
   // clear it off
-  clear();
+  LCDclear();
 
   // Initialize to default text direction (for romance languages)
   _displaymode = LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT;
@@ -57,13 +57,13 @@ void begin(unsigned char cols, unsigned char lines, unsigned char dotsize) {
   _command(LCD_ENTRYMODESET | _displaymode);
 }
 
-void clear()
+void LCDclear()
 {
   _command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
   __delay_us(2000);  // this command takes a long time!
 }
 
-void home()
+void LCDhome()
 {
   _command(LCD_RETURNHOME);  // set cursor position to zero
   __delay_us(2000);  // this command takes a long time!
@@ -71,7 +71,7 @@ void home()
 
 
 /// Set the cursor to a new position. 
-void setCursor(unsigned char col, unsigned char row)
+void LCDsetCursor(unsigned char col, unsigned char row)
 {
   int row_offsets[] = { 0x00, 0x40, 0x14, 0x54   };
   if ( row >= _numlines ) {
@@ -82,76 +82,76 @@ void setCursor(unsigned char col, unsigned char row)
 }
 
 // Turn the display on/off (quickly)
-void noDisplay() {
+void LCDnoDisplay() {
   _displaycontrol &= ~LCD_DISPLAYON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void display() {
+void LCDdisplay() {
   _displaycontrol |= LCD_DISPLAYON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // Turns the underline cursor on/off
-void noCursor() {
+void LCDnoCursor() {
   _displaycontrol &= ~LCD_CURSORON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void cursor() {
+void LCDcursor() {
   _displaycontrol |= LCD_CURSORON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // Turn on and off the blinking cursor
-void noBlink() {
+void LCDnoBlink() {
   _displaycontrol &= ~LCD_BLINKON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void blink() {
+void LCDblink() {
   _displaycontrol |= LCD_BLINKON;
   _command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // These commands scroll the display without changing the RAM
-void scrollDisplayLeft(void) {
+void LCDscrollDisplayLeft(void) {
   _command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
-void scrollDisplayRight(void) {
+void LCDscrollDisplayRight(void) {
   _command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
 }
 
 // This is for text that flows Left to Right
-void leftToRight(void) {
+void LCDleftToRight(void) {
   _displaymode |= LCD_ENTRYLEFT;
   _command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // This is for text that flows Right to Left
-void rightToLeft(void) {
+void LCDrightToLeft(void) {
   _displaymode &= ~LCD_ENTRYLEFT;
   _command(LCD_ENTRYMODESET | _displaymode);
 }
 
 
-void autoscroll(void) {
+void LCDautoscroll(void) {
   _displaymode |= LCD_ENTRYSHIFTINCREMENT;
   _command(LCD_ENTRYMODESET | _displaymode);
 }
 
 
-void noAutoscroll(void) {
+void LCDnoAutoscroll(void) {
   _displaymode &= ~LCD_ENTRYSHIFTINCREMENT;
   _command(LCD_ENTRYMODESET | _displaymode);
 }
 
 
-void setBacklight(unsigned char brightness) {
+void LCDsetBacklight(unsigned char brightness) {
   _backlight = brightness;
   // send no data but set the background-pin right;
   _write2Wire(0x00, RSMODE_DATA, false);
 } // setBackl
 
 
-void createChar(unsigned char location, unsigned char charmap[]) {
+void LCDcreateChar(unsigned char location, unsigned char charmap[]) {
     unsigned char  i ;
   location &= 0x7; // we only have 8 locations 0-7
   _command(LCD_SETCGRAMADDR | (location << 3));
@@ -163,7 +163,7 @@ void createChar(unsigned char location, unsigned char charmap[]) {
 
 inline void write(unsigned char value) {
   _send(value, RSMODE_DATA);
-  return 1; // assume sucess
+ 
 }
 
 
@@ -199,10 +199,10 @@ void _write2Wire(unsigned char  halfByte, unsigned char  mode, unsigned char ena
   if (enable > 0) i2cData |= PCF_EN;
   if (_backlight > 0) i2cData |= PCF_BACKLIGHT;
 
-I2C_start();
-I2C_send_byte(0x7E);
-I2C_send_byte(i2cData);
-I2C_stop();
+I2C_START();
+I2C_SEND_1_BYTE(0x7E);
+I2C_SEND_1_BYTE(i2cData);
+I2C_STOP();
 } 
 
 void lcd_str(const char * s)

@@ -8,6 +8,7 @@ void usart_init(void)
     TRISBbits.TRISB7 = 1 ;
     TRISBbits.TRISB6 = 0 ;
     //PPS
+    
     RPINR18bits.U1RXR = 7; //RP7 = U1RX
     RPOR3bits.RP6R = 3; // RP6 = U1TX
     //CONFIG UART
@@ -102,6 +103,9 @@ unsigned char setHEX(unsigned char ch)
             case 15:
                 return 'F';
             break; 
+            
+            default: 
+                return 'R';
         }
     }
 }

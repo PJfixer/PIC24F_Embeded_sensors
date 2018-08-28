@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/main.c</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/app.h</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/bme280.h</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/bme280.c</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/I2CA.c</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/PCA8574_lcd.h</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/24LC256.h</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/24LC256.c</file>
+            <file>file:/C:/Polytech/GIT/PIC24F_Embeded_sensors/Test_NRF24/NRF_24_TX/P24NoMCC.X/app.c</file>
+        </group>
     </open-files>
 </project-private>
